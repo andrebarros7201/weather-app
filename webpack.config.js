@@ -25,7 +25,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src/index.html"),
-      title: "Test",
+      title: "Weather App",
       filename: "index.html",
     }),
   ],
