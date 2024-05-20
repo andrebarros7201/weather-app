@@ -2,6 +2,21 @@ const displayWeather = (weatherData) => {
   const header = document.querySelector("#weather-location");
   header.textContent = `Weather in ${weatherData.location.name} in ${weatherData.location.region}, ${weatherData.location.country}`;
 
+  const currentWeather = document.querySelector("#current-weather");
+
+  while (currentWeather.firstChild) {
+    currentWeather.removeChild(currentWeather.firstChild);
+  }
+
+  const currentCondition = document.createElement("h2");
+  currentCondition.textContent = `${weatherData.current.condition.text}`;
+
+  const currentTemp = document.createElement("h2");
+  currentTemp.textContent = `It's currently ${weatherData.current.temp_c} cº`;
+
+  currentWeather.appendChild(currentTemp);
+  currentWeather.appendChild(currentCondition);
+
   const divToday = document.querySelector("#today");
   while (divToday.firstChild) {
     divToday.removeChild(divToday.firstChild);
@@ -19,39 +34,40 @@ const displayWeather = (weatherData) => {
   while (div3.firstChild) {
     div3.removeChild(div3.firstChild);
   }
-  const h2Today = document.createElement("h2");
-  h2Today.textContent = "Today";
 
-  const tempToday = document.createElement("h3");
-  tempToday.textContent = `${weatherData.current.temp_c} cº`;
+  const divForecast = [divToday, div1, div2, div3];
 
-  divToday.appendChild(h2Today);
-  divToday.appendChild(tempToday);
-
-  const divForecast = [div1, div2, div3];
-
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     const date = document.createElement("h2");
-    const fullDate = weatherData.forecast.forecastday[i + 1].date;
-    const day = fullDate.slice(-2);
-    const month = fullDate.slice(-5, -3);
-    const year = fullDate.slice(0, 4);
-    date.textContent = `${day}/${month}/${year}`;
+    date.style.textAlign = "center";
+
+    if (i == 0) {
+      date.textContent = "Today";
+    } else {
+      const fullDate = weatherData.forecast.forecastday[i].date;
+      const day = fullDate.slice(-2);
+      const month = fullDate.slice(-5, -3);
+      const year = fullDate.slice(0, 4);
+      date.textContent = `${day}/${month}/${year}`;
+    }
     divForecast[i].appendChild(date);
+    const condition = document.createElement("h3");
+    condition.textContent = `${weatherData.forecast.forecastday[i].day.condition.text}`;
+    condition.style.textAlign = "center";
+
+    divForecast[i].appendChild(condition);
 
     for (let k = 0; k < 24; k++) {
       const span = document.createElement("span");
       const hour = document.createElement("p");
-      const time = weatherData.forecast.forecastday[i + 1].hour[k].time;
+      const time = weatherData.forecast.forecastday[i].hour[k].time;
       const cleanTime = time.slice(-5);
 
       hour.textContent = `${cleanTime}`;
       span.appendChild(hour);
 
       const temp = document.createElement("p");
-      temp.textContent = `${
-        weatherData.forecast.forecastday[i + 1].hour[k].temp_c
-      } cº`;
+      temp.textContent = `${weatherData.forecast.forecastday[i].hour[k].temp_c} cº`;
 
       span.appendChild(temp);
 
