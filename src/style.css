@@ -24,8 +24,21 @@ body {
   padding: 1rem 2rem 2rem 2rem;
 }
 
+#container > span {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2rem;
+  margin: -2rem;
+}
+
 #weather > * > span {
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+#weather > * > span > h2 {
+  text-align: center;
 }
