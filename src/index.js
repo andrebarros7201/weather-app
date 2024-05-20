@@ -1,4 +1,4 @@
 import "./style.css";
-import { createDisplay } from "./display/main";
+import { weather } from "./display/weather";
 
-createDisplay();
+weather();
