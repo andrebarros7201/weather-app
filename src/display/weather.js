@@ -79,7 +79,7 @@ const displayWeather = (weatherData) => {
 const getWeather = async (city) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=a523d4c8792a4e5581d154759241805&q=${city}&days=4&aqi=no&alerts=no`
+      `https://api.weatherapi.com/v1/forecast.json?key=a523d4c8792a4e5581d154759241805&q=${city}&days=4&aqi=no&alerts=no`
     );
     const weatherData = await response.json();
     console.log(weatherData);
